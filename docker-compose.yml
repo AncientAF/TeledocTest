@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  teledoctestdb:
+    image: postgres
+
+  teledoctest.api:
+    image: ${DOCKER_REGISTRY-}teledoctestapi
+    build:
+      context: .
+      dockerfile: TeledocTest.API/Dockerfile
+
+volumes:
+  postgres_teledoc:
