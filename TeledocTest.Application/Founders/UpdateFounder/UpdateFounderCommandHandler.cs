@@ -1,5 +1,4 @@
-﻿
-namespace TeledocTest.Application.Founders.UpdateFounder;
+﻿namespace TeledocTest.Application.Founders.UpdateFounder;
 public class UpdateFounderCommandHandler : ICommandHandler<UpdateFounderCommand, UpdateFounderResponse>
 {
     private readonly IFounderRepository _repository;
