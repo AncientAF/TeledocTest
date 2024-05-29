@@ -1,4 +1,4 @@
-﻿using TeledocTest.Application.Clients.CreateClient;
+﻿using TeledocTest.Application.Clients;
 
 namespace TeledocTest.Application.Clients;
 
@@ -13,7 +13,7 @@ public class CreateClientCommandHandler : ICommandHandler<CreateClientCommand, C
 
     public async Task<CreateClientResponse> Handle(CreateClientCommand request, CancellationToken cancellationToken)
     {
-        var result = await _repository.Create(request.Adapt<Client>(), cancellationToken);
+        var result = await _repository.Create(request.Adapt<Client>(), request.FoundersIds, cancellationToken);
 
         var response = new CreateClientResponse(result);
 

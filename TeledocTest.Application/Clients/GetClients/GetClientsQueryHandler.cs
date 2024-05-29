@@ -1,6 +1,5 @@
-﻿
-namespace TeledocTest.Application.Clients.GetClients;
-internal class GetClientsQueryHandler : IQueryHandler<GetClientsQuery, GetClientsResponse>
+﻿namespace TeledocTest.Application.Clients;
+public class GetClientsQueryHandler : IQueryHandler<GetClientsQuery, GetClientsResponse>
 {
     private readonly IClientRepository _repository;
 
@@ -13,7 +12,7 @@ internal class GetClientsQueryHandler : IQueryHandler<GetClientsQuery, GetClient
     {
         var result = await _repository.Get(cancellationToken);
 
-        var response = result.Adapt<GetClientsResponse>();
+        var response = new GetClientsResponse(result);
 
         return response;
     }

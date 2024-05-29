@@ -1,4 +1,4 @@
-﻿namespace TeledocTest.Application.Founders.DeleteFounder;
+﻿namespace TeledocTest.Application.Founders;
 public class DeleteFounderCommandValidator : AbstractValidator<DeleteFounderCommand>
 {
     public DeleteFounderCommandValidator()

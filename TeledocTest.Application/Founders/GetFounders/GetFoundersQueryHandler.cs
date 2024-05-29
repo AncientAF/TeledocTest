@@ -1,5 +1,5 @@
 ﻿
-namespace TeledocTest.Application.Founders.GetFounders;
+namespace TeledocTest.Application.Founders;
 public class GetFoundersQueryHandler : IQueryHandler<GetFoundersQuery, GetFoundersResponse>
 {
     private readonly IFounderRepository _repository;

@@ -11,11 +11,11 @@ public class ClientRepository : IClientRepository
     }
     public async Task<IEnumerable<Client>> Get(CancellationToken cancellationToken)
     {
-        return await _dbContext.Clients.AsNoTracking().ToListAsync(cancellationToken);
+        return await _dbContext.Clients.AsNoTracking().Include(c => c.Founders).ToListAsync(cancellationToken);
     }
     public async Task<Client> GetById(Guid Id, CancellationToken cancellationToken)
     {
-        var client = await _dbContext.Clients.AsNoTracking().FirstOrDefaultAsync(c => c.Id == Id, cancellationToken);
+        var client = await _dbContext.Clients.AsNoTracking().Include(c => c.Founders).FirstOrDefaultAsync(c => c.Id == Id, cancellationToken);
 
         if (client is null)
             throw new NotFoundException(nameof(Client), nameof(Id), Id);
@@ -25,7 +25,7 @@ public class ClientRepository : IClientRepository
 
     public async Task<Client> GetByTaxId(string TaxId, CancellationToken cancellationToken)
     {
-        var client = await _dbContext.Clients.AsNoTracking().FirstOrDefaultAsync(c => c.TaxId == TaxId, cancellationToken);
+        var client = await _dbContext.Clients.AsNoTracking().Include(c => c.Founders).FirstOrDefaultAsync(c => c.TaxId == TaxId, cancellationToken);
 
         if (client is null)
             throw new NotFoundException(nameof(Client), nameof(TaxId), TaxId);
@@ -33,8 +33,11 @@ public class ClientRepository : IClientRepository
         return client;
     }
 
-    public async Task<Guid> Create(Client client, CancellationToken cancellationToken)
+    public async Task<Guid> Create(Client client, IList<Guid>? foundersIds, CancellationToken cancellationToken)
     {
+        if(foundersIds != null)
+            client.Founders = await _dbContext.Founders.Where(f => foundersIds.Contains(f.Id)).ToListAsync();
+
         await _dbContext.Clients.AddAsync(client, cancellationToken);
 
         await _dbContext.SaveChangesAsync(cancellationToken);
@@ -42,9 +45,14 @@ public class ClientRepository : IClientRepository
         return client.Id;
     }
 
-    public async Task<Client> Update(Client client, CancellationToken cancellationToken)
+    public async Task<Client> Update(Client client, IList<Guid>? foundersIds, CancellationToken cancellationToken)
     {
         var clientToUpdate = await GetClient(client.Id, cancellationToken);
+
+        if (foundersIds != null)
+            clientToUpdate.Founders = await _dbContext.Founders.Where(f => foundersIds.Contains(f.Id)).ToListAsync();
+        else
+            clientToUpdate.Founders = Array.Empty<Founder>();
 
         clientToUpdate.Update(client);
 
@@ -66,7 +74,7 @@ public class ClientRepository : IClientRepository
 
     private async Task<Client> GetClient(Guid Id, CancellationToken cancellationToken)
     {
-        var client = await _dbContext.Clients.FirstOrDefaultAsync(c => c.Id == Id, cancellationToken);
+        var client = await _dbContext.Clients.Include(c => c.Founders).FirstOrDefaultAsync(c => c.Id == Id, cancellationToken);
 
         if (client is null)
             throw new NotFoundException(nameof(Client), nameof(Id), Id);

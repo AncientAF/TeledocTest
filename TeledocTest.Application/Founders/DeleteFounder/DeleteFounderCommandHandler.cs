@@ -1,4 +1,4 @@
-﻿namespace TeledocTest.Application.Founders.DeleteFounder;
+﻿namespace TeledocTest.Application.Founders;
 public class DeleteFounderCommandHandler : ICommandHandler<DeleteFounderCommand, DeleteFounderResponse>
 {
     private readonly IFounderRepository _repository;

@@ -1,4 +1,4 @@
-﻿namespace TeledocTest.Application.Clients.GetClientById;
+﻿namespace TeledocTest.Application.Clients;
 public class GetClientByIdQueryHandler : IQueryHandler<GetClientByIdQuery, GetClientByIdResponse>
 {
     private readonly IClientRepository _repository;

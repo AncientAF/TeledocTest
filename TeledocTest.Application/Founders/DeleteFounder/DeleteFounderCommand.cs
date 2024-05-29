@@ -1,3 +1,3 @@
-﻿namespace TeledocTest.Application.Founders.DeleteFounder;
+﻿namespace TeledocTest.Application.Founders;
 public record DeleteFounderCommand(Guid Id) : ICommand<DeleteFounderResponse>;
 public record DeleteFounderResponse(bool IsSuccess);

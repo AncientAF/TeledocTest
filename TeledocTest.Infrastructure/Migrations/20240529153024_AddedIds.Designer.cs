@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TeledocTest.Infrastructure.Data;
@@ -11,9 +12,11 @@ using TeledocTest.Infrastructure.Data;
 namespace TeledocTest.Infrastructure.Migrations
 {
     [DbContext(typeof(TeledocTestDbContext))]
-    partial class TeledocTestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529153024_AddedIds")]
+    partial class AddedIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

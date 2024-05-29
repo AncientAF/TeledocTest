@@ -1,5 +1,4 @@
-﻿
-namespace TeledocTest.Application.Founders.GetFounderById;
+﻿namespace TeledocTest.Application.Founders;
 public class GetFounderByIdQueryHandler : IQueryHandler<GetFounderByIdQuery, GetFounderByIdResponse>
 {
     private readonly IFounderRepository _repository;

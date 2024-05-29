@@ -1,5 +1,4 @@
-﻿
-namespace TeledocTest.Application.Founders.GetFounderByTaxId;
+﻿namespace TeledocTest.Application.Founders;
 public class GetFounderByTaxIdQueryHandler : IQueryHandler<GetFounderByTaxIdQuery, GetFounderByTaxIdResponse>
 {
     private readonly IFounderRepository _repository;

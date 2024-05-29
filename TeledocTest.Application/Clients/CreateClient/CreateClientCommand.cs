@@ -1,3 +1,3 @@
-﻿namespace TeledocTest.Application.Clients.CreateClient;
-public record CreateClientCommand(string TaxId, string Name, ClientType Type, IEnumerable<Founder> Founders) : ICommand<CreateClientResponse>;
+﻿namespace TeledocTest.Application.Clients;
+public record CreateClientCommand(string TaxId, string Name, ClientType Type, IList<Guid>? FoundersIds) : ICommand<CreateClientResponse>;
 public record CreateClientResponse(Guid Id);

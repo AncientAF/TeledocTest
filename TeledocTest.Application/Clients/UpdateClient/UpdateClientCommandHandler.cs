@@ -1,5 +1,5 @@
 ﻿
-namespace TeledocTest.Application.Clients.UpdateClient;
+namespace TeledocTest.Application.Clients;
 public class UpdateClientCommandHandler : ICommandHandler<UpdateClientCommand, UpdateClientResponse>
 {
     private readonly IClientRepository _repository;
@@ -11,7 +11,7 @@ public class UpdateClientCommandHandler : ICommandHandler<UpdateClientCommand, U
 
     public async Task<UpdateClientResponse> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
     {
-        var result = await _repository.Update(request.Adapt<Client>(), cancellationToken);
+        var result = await _repository.Update(request.Adapt<Client>(), request.FoundersIds, cancellationToken);
 
         var response = result.Adapt<UpdateClientResponse>();
 

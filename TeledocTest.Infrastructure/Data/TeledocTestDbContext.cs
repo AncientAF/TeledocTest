@@ -1,4 +1,6 @@
-﻿namespace TeledocTest.Infrastructure.Data;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace TeledocTest.Infrastructure.Data;
 public class TeledocTestDbContext : DbContext
 {
     public DbSet<Client> Clients { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace TeledocTest.Application.Clients.DeleteClient;
+﻿namespace TeledocTest.Application.Clients;
 public class DeleteClientCommandValidator : AbstractValidator<DeleteClientCommand>
 {
     public DeleteClientCommandValidator()

@@ -1,9 +1,4 @@
-﻿
-
-
-
-
-namespace TeledocTest.Application.Clients.GetClientByTaxId;
+﻿namespace TeledocTest.Application.Clients;
 public class GetClientByTaxIdQueryHandler : IQueryHandler<GetClientByTaxIdQuery, GetClientByTaxIdResponse>
 {
     private readonly IClientRepository _repository;

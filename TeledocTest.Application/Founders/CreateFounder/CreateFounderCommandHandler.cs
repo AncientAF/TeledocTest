@@ -1,5 +1,4 @@
-﻿
-namespace TeledocTest.Application.Founders.CreateFounder;
+﻿namespace TeledocTest.Application.Founders;
 public class CreateFounderCommandHandler : ICommandHandler<CreateFounderCommand, CreateFounderResponse>
 {
     private readonly IFounderRepository _repository;
@@ -11,9 +10,9 @@ public class CreateFounderCommandHandler : ICommandHandler<CreateFounderCommand,
 
     public async Task<CreateFounderResponse> Handle(CreateFounderCommand request, CancellationToken cancellationToken)
     {
-        var result = await _repository.Create(request.Adapt<Founder>(), cancellationToken);
+        var result = await _repository.Create(request.Adapt<Founder>(), request.LegalEntitiesIds, cancellationToken);
 
-        var response = result.Adapt<CreateFounderResponse>();
+        var response = new CreateFounderResponse(result);
 
         return response;
     }
