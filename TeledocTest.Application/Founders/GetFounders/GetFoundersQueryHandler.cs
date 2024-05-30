@@ -13,7 +13,7 @@ public class GetFoundersQueryHandler : IQueryHandler<GetFoundersQuery, GetFounde
     {
         var result = await _repository.Get(cancellationToken);
 
-        var response = new GetFoundersResponse(result);
+        var response = new GetFoundersResponse(result.Adapt<IEnumerable<FounderWithRelationsResponse>>());
 
         return response;
     }

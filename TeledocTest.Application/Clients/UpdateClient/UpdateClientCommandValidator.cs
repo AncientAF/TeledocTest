@@ -9,11 +9,11 @@ public class UpdateClientCommandValidator : AbstractValidator<UpdateClientComman
             .When(c => !String.IsNullOrEmpty(c.TaxId));
 
         RuleFor(c => c.TaxId).Length(10).When(c => c.Type == ClientType.LegalEntity).WithMessage("ИНН юридического лица обязан быть длиной в 10 символов").When(c => !String.IsNullOrEmpty(c.TaxId));
-        RuleFor(c => c.TaxId).Length(12).When(c => c.Type == ClientType.EntrepreneurialEntity).WithMessage("ИНН физического лица обязан быть длиной в 12 символов").When(c => !String.IsNullOrEmpty(c.TaxId));
+        RuleFor(c => c.TaxId).Length(12).When(c => c.Type == ClientType.Individual).WithMessage("ИНН физического лица обязан быть длиной в 12 символов").When(c => !String.IsNullOrEmpty(c.TaxId));
 
         RuleFor(c => c.Type)
             .IsInEnum().WithMessage("Недопустимый тип клиента");
 
-        RuleFor(c => c.FoundersIds).Empty().When(c => c.Type == ClientType.EntrepreneurialEntity);
+        RuleFor(c => c.FoundersIds).Empty().When(c => c.Type == ClientType.Individual);
     }
 }

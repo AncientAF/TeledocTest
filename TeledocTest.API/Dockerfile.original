@@ -10,9 +10,6 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["TeledocTest.API/TeledocTest.API.csproj", "TeledocTest.API/"]
-COPY ["TeledocTest.Application/TeledocTest.Application.csproj", "TeledocTest.Application/"]
-COPY ["TeledocTest.Core/TeledocTest.Core.csproj", "TeledocTest.Core/"]
-COPY ["TeledocTest.Infrastructure/TeledocTest.Infrastructure.csproj", "TeledocTest.Infrastructure/"]
 RUN dotnet restore "./TeledocTest.API/TeledocTest.API.csproj"
 COPY . .
 WORKDIR "/src/TeledocTest.API"

@@ -10,6 +10,6 @@ internal class FounderConfiguration : IEntityTypeConfiguration<Founder>
 
         builder.HasIndex(f => f.TaxId).IsUnique();
 
-        builder.HasMany(f => f.LegalEntities).WithMany(c => c.Founders);
+        builder.HasMany(f => f.LegalEntities).WithMany(c => c.Founders).UsingEntity<ClientFounder>(); ;
     }
 }

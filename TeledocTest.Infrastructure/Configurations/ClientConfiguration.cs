@@ -10,6 +10,6 @@ internal class ClientConfiguration : IEntityTypeConfiguration<Client>
 
         builder.HasIndex(c => c.TaxId).IsUnique();
 
-        builder.HasMany(c => c.Founders).WithMany(f => f.LegalEntities);
+        builder.HasMany(c => c.Founders).WithMany(f => f.LegalEntities).UsingEntity<ClientFounder>();
     }
 }

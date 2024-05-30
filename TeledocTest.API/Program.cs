@@ -1,5 +1,6 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Text.Json.Serialization;
 using TeledocTest.API.Extensions;
 using TeledocTest.API.Middleware;
@@ -14,6 +15,9 @@ var dbConnection = builder.Configuration.GetConnectionString("Database");
 
 // Add services to the container.
 
+builder.Host.UseSerilog((context, loggerConfig) =>
+    loggerConfig.ReadFrom.Configuration(context.Configuration));
+
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(typeof(CreateClientCommand).Assembly);
@@ -22,7 +26,7 @@ builder.Services.AddMediatR(config =>
 });
 builder.Services.AddValidatorsFromAssembly(typeof(CreateClientCommand).Assembly);
 
-builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddControllers();//.AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

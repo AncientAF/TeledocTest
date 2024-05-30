@@ -1,4 +1,8 @@
 ﻿namespace TeledocTest.Core.Models;
+
+///<summary>
+/// Класс описывающий учредителя
+/// <summary>
 public class Founder : BaseEntity
 {
     public string TaxId { get; set; } = default!;

@@ -12,7 +12,7 @@ public class GetClientsQueryHandler : IQueryHandler<GetClientsQuery, GetClientsR
     {
         var result = await _repository.Get(cancellationToken);
 
-        var response = new GetClientsResponse(result);
+        var response = new GetClientsResponse(result.Adapt<IEnumerable<ClientWithRelationsResponse>>());
 
         return response;
     }

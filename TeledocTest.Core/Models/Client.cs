@@ -1,6 +1,10 @@
 ﻿using TeledocTest.Core.Enums;
 
 namespace TeledocTest.Core.Models;
+
+///<summary>
+/// Класс описывающий клиента
+/// <summary>
 public class Client : BaseEntity
 {
     public string TaxId { get; set; } = default!;

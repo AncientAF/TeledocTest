@@ -10,7 +10,7 @@ public class CreateClientCommandValidator : AbstractValidator<CreateClientComman
             .Must(t => long.TryParse(t, out _)).WithMessage("ИНН должен содержать только числа");
 
         RuleFor(c => c.TaxId).Length(10).When(c => c.Type == ClientType.LegalEntity).WithMessage("ИНН юридического лица обязан быть длиной в 10 символов");
-        RuleFor(c => c.TaxId).Length(12).When(c => c.Type == ClientType.EntrepreneurialEntity).WithMessage("ИНН физического лица обязан быть длиной в 12 символов");
+        RuleFor(c => c.TaxId).Length(12).When(c => c.Type == ClientType.Individual).WithMessage("ИНН физического лица обязан быть длиной в 12 символов");
 
         RuleFor(c => c.Name)
             .NotEmpty().WithMessage("Наименование клиента не может быть пустым");
@@ -18,6 +18,6 @@ public class CreateClientCommandValidator : AbstractValidator<CreateClientComman
         RuleFor(c => c.Type)
             .IsInEnum().WithMessage("Недопустимый тип клиента");
 
-        RuleFor(c => c.FoundersIds).Empty().When(c => c.Type == ClientType.EntrepreneurialEntity);
+        RuleFor(c => c.FoundersIds).Empty().When(c => c.Type == ClientType.Individual);
     }
 }
